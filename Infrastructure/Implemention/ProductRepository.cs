@@ -26,12 +26,14 @@ public class ProductRepository(ApplicationDbContext dbcontext) : IProductReposit
     public async Task<IReadOnlyList<Product>> GetProductsAsync(string? brand ,string? type,string? sort)
     {
         var query = dbcontext.Products.AsQueryable();
+      
         if(!string.IsNullOrWhiteSpace(brand))
             query = query.Where(x=>x.Brand==brand);
         if(!string.IsNullOrWhiteSpace(type))
             query = query.Where(x=>x.Type==type);
         if(!string.IsNullOrWhiteSpace(sort))
         {
+            //query.OrderBy()
             query = sort switch
             {
                 "priceAsc" => query.OrderBy(x=>x.Price),
