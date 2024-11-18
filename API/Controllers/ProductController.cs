@@ -5,28 +5,29 @@ using Core.Specification;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.RequestHelper;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductController(IGenericRepository<Product> repository) :ControllerBase
+public class ProductController(IGenericRepository<Product> repository) :BaseApiController
 {
    
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand ,string? type,string? sort){
+    public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(
+        [FromQuery]ProductSpecParmas specParmas){
 
-        var spec = new ProductSpecification(brand:brand,type:type,sort:sort);
-        var products = await repository.GetListAsync(spec);
-        return Ok(products);
+        var spec = new ProductSpecification(specParmas);
+        return await CreatePagedResultAsync(repository,spec,specParmas.PageIndex,specParmas.PageSize );
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Product>> GetProduct(int id )
     {
         var product = await repository.GetByIdAsync(id);
-        if(product ==null) return NotFound();
+         if(product ==null) return NotFound();
         return product;
     }
     [HttpPost]

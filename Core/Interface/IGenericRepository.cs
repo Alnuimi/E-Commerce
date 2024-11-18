@@ -18,5 +18,6 @@ public interface IGenericRepository<T> where T :BaseEntity
     void Update(T entity);
     Task<bool> IsExistsAsync(int id);
     bool IsExists(int id);
+    Task<int> CountAsync(ISpecification<T> specification);
     Task<bool> SaveChangeAsync();
 }

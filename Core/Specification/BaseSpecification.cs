@@ -18,6 +18,10 @@ public class BaseSpecification<T>( Expression<Func<T, bool>>?  expression) : ISp
 
     public bool IsDistinct  {get;private set;}
 
+    public int Take {get;private set;}
+
+    public int Skip {get;private set;}
+    public bool IsApplyPagingEnabled{get;private set;}
     protected void AddOrderBy ( Expression<Func<T,object >> OrderByExpression)
     {
         OrderBy =OrderByExpression;
@@ -32,6 +36,25 @@ public class BaseSpecification<T>( Expression<Func<T, bool>>?  expression) : ISp
         IsDistinct=true;
     }
 
+    protected void ApplyPaging(int skip,int take)
+    {
+        Skip=skip;
+        Take=take;
+        IsApplyPagingEnabled=true;
+    }
+    protected void AddSkip(int skip)
+    {
+        Skip=skip;
+    }
+
+    public IQueryable<T> ApplyExpression(IQueryable<T> query)
+    {
+        if(Expression!=null)
+        {
+            query =query.Where(Expression);
+        }
+        return query;
+    }
 }
 
 public class BaseSpecification<T, TResult>(Expression<Func<T, bool>>? expression) : BaseSpecification<T>(expression), ISpecification<T, TResult>

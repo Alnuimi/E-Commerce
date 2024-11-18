@@ -99,5 +99,10 @@ public class GenericRepository<T>(ApplicationDbContext dbContext) : IGenericRepo
         return SpecificationEvaluator<T>.GetQuery<T, TResult>(dbContext.Set<T>().AsQueryable<T>(), specification);
     }
 
-
+    public async Task<int> CountAsync(ISpecification<T> specification)
+    {
+        var query = dbContext.Set<T>().AsQueryable();
+       query = specification.ApplyExpression(query);
+       return await query.CountAsync();
+    }
 }
