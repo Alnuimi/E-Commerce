@@ -1,11 +1,4 @@
 <app-header></app-header>
 <div class="container mt-6">
-  <h2 class="text-3xl font-bold underline">Wellcome to {{title}}</h2>
-  <ul>
-    @for (product of products; track product.id)
-     {
-      <li>{{product.brand}}</li>
-    
-     }
-  </ul>
+  <app-shop></app-shop>
 </div>
