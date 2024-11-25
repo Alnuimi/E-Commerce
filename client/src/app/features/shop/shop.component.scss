@@ -7,3 +7,12 @@
     background-size: cover;
   }
   
+  .search-form{
+    transition: transform 0.1s, box-shadow 0.1s;
+ }
+ 
+ .search-form:hover {
+     transform: translateY(-8px);
+     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+     cursor: pointer;
+ }
