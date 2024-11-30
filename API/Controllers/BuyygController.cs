@@ -23,8 +23,12 @@ public class BuyygController:BaseApiController
     {
        throw new Exception("This is test expecetion");
     }
-
-     [HttpGet("validationerror")]
+    [HttpGet("notfound")]
+    public IActionResult GetNotFoundError()
+    {
+       return NotFound();
+    }
+     [HttpPost("validationerror")]
     public IActionResult GetValidationError(CreateProductDto product)
     {
         return Ok();

@@ -7,6 +7,8 @@
 $customTheme: mat.define-theme();
 @include mat.core();
 
+
+
 .custom-theme {
     @include mat.all-component-themes($customTheme);
 
@@ -29,4 +31,18 @@ button.match-input-height{
 
 .mdc-notched-outline__notch{
     border-right-style: none !important;
+}
+
+.mat-mdc-snack-bar-container.snack-error{
+    --mdc-snackbar-container-color: red;
+    --mat-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+
+}
+
+.mat-mdc-snack-bar-container.snack-success{
+    --mdc-snackbar-container-color: #fcd34d;
+    --mat-snack-bar-button-color: #7d00fa;
+    --mdc-snackbar-supporting-text-color:  #7d00fa;
+                
 }
