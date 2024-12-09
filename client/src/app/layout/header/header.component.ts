@@ -6,6 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BusyService } from '../../core/services/busy.service';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { CartService } from '../../core/services/cart.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -15,12 +16,12 @@ import { MatSpinner } from '@angular/material/progress-spinner';
     MatBadge,
     RouterLink,
     RouterLinkActive,
-    MatProgressBar,
-    MatSpinner
+    MatProgressBar
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   busyServices = inject(BusyService);
+  cartService = inject(CartService);
 }
