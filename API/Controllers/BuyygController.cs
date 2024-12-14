@@ -1,9 +1,12 @@
 using System;
+using System.Security.Claims;
 using API.DTOs;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
 
 public class BuyygController:BaseApiController
 {
@@ -33,5 +36,16 @@ public class BuyygController:BaseApiController
     {
         return Ok();
       //return BadRequest();
+    }
+
+    [Authorize]
+    [HttpGet("secret")]
+
+    public IActionResult GetSecret()
+    {
+        var user = User.FindFirst(ClaimTypes.Name)?.Value;
+        var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        return Ok("Hello "+user +" with the id of "+id);
     }
 }
