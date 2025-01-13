@@ -16,6 +16,7 @@ public class ApplicationDbContext:IdentityDbContext<AppUser>
     public DbSet<Product> Products { get; set; }
     public DbSet<Address> Addresses {get; set; }
 
+    public DbSet<DeliveryMethod> DeliveryMethods {get; set;} 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

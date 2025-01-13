@@ -16,5 +16,14 @@ public class StoreContextSeed
             dbContext.Products.AddRange(product);
             await dbContext.SaveChangesAsync();
         }
+
+        if(!dbContext.DeliveryMethods.Any())
+        {
+            var deliveryMethodData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/delivery.json");
+            var deliveryMethod = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodData);
+            if(deliveryMethod==null)return;
+            dbContext.DeliveryMethods.AddRange(deliveryMethod);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

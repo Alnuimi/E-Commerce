@@ -23,7 +23,6 @@ public class RequestTimingMiddleware
         }
         finally
         {
-           
             stopwatch.Stop();
             _logger.LogInformation(
                 "Request {Path} took {ElapsedMilliseconds}ms Ticks {ElapsedTicks} Elapsed {Elapsed}",

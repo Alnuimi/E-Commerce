@@ -32,7 +32,7 @@ builder.Services.AddSingleton<ICartService,CartService>();
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
         .AddEntityFrameworkStores<ApplicationDbContext>();
-
+builder.Services.AddScoped<IPaymentServices, PaymentService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
