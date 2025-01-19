@@ -80,12 +80,7 @@ public class GenericRepository<T>(ApplicationDbContext dbContext) : IGenericRepo
 
 
 
-    #region Task Boolean to save async change in database
-    public async Task<bool> SaveChangeAsync()
-    {
-        return await dbContext.SaveChangesAsync() > 0;
-    }
-    #endregion
+ 
 
 
 
