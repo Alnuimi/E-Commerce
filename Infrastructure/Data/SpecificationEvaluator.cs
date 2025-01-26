@@ -1,6 +1,7 @@
 using System;
 using Core.Entities;
 using Core.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
@@ -24,7 +25,8 @@ public class SpecificationEvaluator<T> where T :BaseEntity
         {
             query=query.Skip(specification.Skip).Take(specification.Take);
         }
-        
+        query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));
+        query = specification.IncludesStrings.Aggregate(query, (current, include) => current.Include(include));
         return query;
     }
 
