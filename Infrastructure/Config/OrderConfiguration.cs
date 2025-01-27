@@ -21,5 +21,9 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             d => d.ToUniversalTime(),
             d => DateTime.SpecifyKind(d, DateTimeKind.Utc)
         );
+        builder.Property(x => x.AddTime).HasConversion(
+            d => d.ToLocalTime(),
+            d => DateTime.SpecifyKind(d, DateTimeKind.Local)
+        );
     }
 }

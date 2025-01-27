@@ -23,8 +23,8 @@ export class CheckoutDeliveryComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutService.getDeliveryMethods().subscribe({
       next: methods => {
-        if(this.cartService.cart()?.DeliveryMethodId){
-          const method = methods.find(x => x.id === this.cartService.cart()?.DeliveryMethodId);
+        if(this.cartService.cart()?.deliveryMethodId){
+          const method = methods.find(x => x.id === this.cartService.cart()?.deliveryMethodId);
           if(method){
             this.cartService.selectedDelivery.set(method);
             this.deliveryComplete.emit(true);
@@ -38,7 +38,7 @@ export class CheckoutDeliveryComponent implements OnInit {
     this.cartService.selectedDelivery.set(method);
     const cart = this.cartService.cart();
     if(cart){
-      cart.DeliveryMethodId = method.id;
+      cart.deliveryMethodId = method.id;
       this.cartService.setCart(cart);
       this.deliveryComplete.emit(true);
     }

@@ -1,4 +1,5 @@
 using API.Middleware;
+using API.SignalR;
 using Core.Entities;
 using Core.Interface;
 using Infrastructure.Data;
@@ -34,6 +35,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
         .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IPaymentServices, PaymentService>();
+builder.Services.AddSignalR();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -50,8 +52,13 @@ app.UseMiddleware<RequestTimingMiddleware>();
 app.UseCors(x=>x.AllowAnyHeader ().AllowAnyMethod().AllowCredentials()
     .WithOrigins("http://localhost:4200","https://localhost:4200")
 );
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<AppUser>(); //  api/login
+app.MapHub<NotificationHub>("/hub/notifications");
 try
 {
     var scope = app.Services.CreateScope();

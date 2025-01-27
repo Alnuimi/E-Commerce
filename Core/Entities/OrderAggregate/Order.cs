@@ -13,6 +13,7 @@ public class Order : BaseEntity
     public decimal SubTotal { get; set; }
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
     public required string PaymentIntentId { get; set; }
+    public DateTime AddTime { get; set; }  = DateTime.Now;
 
     public decimal GetTotal() 
     {
